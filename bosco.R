@@ -1,0 +1,20 @@
+library(ggplot2)
+
+
+episodes <- 1:16
+placement <- c("High", "Safe", "Safe", "Safe", "Win", "Safe", "High", "Safe", 
+               "Win", "Bottom", "Safe", "Bottom", "Win", "Low", "Top 5", "Elim")
+
+placement_levels <- c("Win", "High", "Top 5", "Safe", "Low", "Bottom", "Elim")
+placement_factor <- factor(placement, levels = placement_levels)
+
+bosco_data <- data.frame(Episode = episodes, Placement = placement_factor)
+
+ggplot(bosco_data, aes(x = factor(Episode), y = Placement)) +
+  geom_col(fill = "plum", color = "black", width = 0.7, stat = "identity", position = "identity") +
+  scale_y_discrete(limits = rev(placement_levels)) +
+  labs(title = "Bosco's Run - RuPaul's Drag Race Season 14",
+       x = "Episode",
+       y = "Placement") +
+  theme_minimal() +
+  theme(axis.text.x = element_text(angle = 0, hjust = 1))
